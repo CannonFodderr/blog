@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+<div class="ui main container">
+    <div class="ui inverted segment">
+        <div class="ui segment">
+        
+            <ul class="gallery">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+    </div>
+        
+    <div class="ui stackable three column grid">
+        
+            <% allPosts.forEach(function(post){ %>
+                <div class="column">
+                    <div class="ui segment">
+                    <h4><%= post.title %></h4>
+                    <p>Posted by <strong><%= post.author.username %></strong> on <%= post.date.toDateString() %></p>
+                    <a href="/blog/<%= post._id%>">
+                    <div class="image gridimage">
+                        <img src="<%= post.image%>">
+                    </div>
+                    </a>
+                    <p><%= post.description %></p>  
+                    <a href="/blog/<%= post._id%>" class="ui fluid small blue button">Read more</a>
+                    </div>
+                </div>
+                
+           <% }); %>
+    </div>
+</div>
+<% include ../partials/footer %>

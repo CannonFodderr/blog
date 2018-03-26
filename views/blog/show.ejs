@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+<div class="ui main container">
+    <h1><%= post.title %></h1>
+    <div class="ui fluid rounded image">
+        <img src="<%= post.image %>">
+    </div>
+
+    <p class="ui meta">Published on <%= post.date.toDateString() %> by <strong><%= post.author.username %></strong></p>
+
+    <div class="ui segment"><p><%- post.body %></p></div>
+    <h4 class="ui header">Comments</h4>
+    <div class="ui basic segment">
+        <a id="addCommentBtn" class="compact ui blue button" href="/blog/<%=post._id %>/comment">Add comment</a>
+        <% post.comments.forEach(function(comment){ %>
+        <div class="ui grey segment comment">
+            <p><strong><%= comment.author.username %></strong> - <%= comment.date.toDateString()%></p>
+            <p><%= comment.body%></p>
+
+        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+            <div class="ui inverted segment controls">
+                <a class="compact ui small orange button" href="/blog/<%= post._id %>/comments/<%= comment._id%>/edit">Edit Comment</a>
+                <form class="ui form deleteForm" action="/blog/<%= post._id %>/comments/<%= comment._id%>?_method=Delete" method="Post">
+                    <button class="compact ui right floated small red button">Delete</button>
+                </form>
+            </div>
+            <% } %>
+
+        </div>
+           
+        <% }); %>
+    </div>
+
+    <% if(currentUser && post.author.id.equals(currentUser._id)){ %>
+        <div class="ui inverted segment">
+            <h4>Post Control Panel</h4>
+            <a href="/blog/<%= post._id %>/edit"class="ui orange button">Edit</a>
+            <form class="ui form deleteForm" action="/blog/<%= post._id %>?_method=DELETE" method="POST">
+                <button class="ui right floated red button">Delete</button>
+            </form>
+        </div>
+    <% } %>
+
+</div>
+<% include ../partials/footer %>

@@ -1,0 +1,92 @@
+<% include ../partials/header %>
+
+<div class="ui raised padded main container segment">
+    <h1> Create new recepie </h1>
+    <div class="ui form">
+        <div class="two fields">
+            <div class="field">
+                    <label>Ingridient name</label>
+                    <input id="ingridientInput" type="text"  placeholder="Enter ingridient..">
+                </div>
+                <div class="field">
+                    <label>How much?</label>
+                    <input id="amountInput" type="text"  placeholder="Enter amount..">
+            </div>
+        </div>
+
+        <button id="addIngridient" class="ui blue button">Add</button>
+    </div>
+
+        <form class="ui form" action="/addIngridients" method="POST">
+            <ul id="ingridientsList" class="ui big horizontal divided list">
+                <div class='item listItem'><span class='removeButton'><i class=" red trash alternate icon"></i></span><strong>Butter - </strong>200g</div>
+                <div class='item listItem'><span class='removeButton'><i class=" red trash alternate icon"></i></span><strong>Bacon - </strong>200g </div>
+                <div class='item listItem'><span class='removeButton'><i class=" red trash alternate icon"></i></span><strong>Cheese - </strong> 200g</div>
+            </ul>
+                <h4>Cooking Steps</h4>
+                <div id="editor" style="height:300px">
+                        <p>First add the <strong>butter</strong> to the pan</p>
+                        <p><br></p>
+                </div>
+                <div class="field">
+                    <h4>Notes and modifications</h4>
+                    <textarea rows="4">You can add as much butter as you like but do not replace the bacon!</textarea>
+                </div>
+
+                <div class="field">
+                    <label>Link to image</label>
+                    <input type="text" placeholder="Image URL">
+                </div>
+
+
+            <button class="ui blue button">Submit</button>
+        </div>
+
+
+    </form>
+
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    
+var quill = new Quill('#editor', {
+        theme: 'snow',
+        
+});
+
+init();
+
+function init () {
+    var addIngridient = document.getElementById('addIngridient');
+    var amountInput = document.getElementById('amountInput');
+    var ingridientsList = document.getElementById('ingridientsList');
+    var listItems = document.getElementsByClassName('listItem');
+    
+
+    addIngridient.addEventListener('click', addItem);
+    ingridientsList.addEventListener('mouseover', removeItem);
+}
+
+function addItem() {
+    var userInput = document.getElementById('ingridientInput');
+    document.getElementById('ingridientsList').innerHTML += "<div class='item listItem'><span class='removeButton'><i class='red trash alternate icon'></i></span><strong>" + ingridientInput.value + "</strong> - " + amountInput.value + "</div>";
+    userInput.value = "";
+    amountInput.value = "";
+    init();
+};
+
+    
+
+function removeItem(){
+    var removeButtons = document.querySelectorAll('.removeButton');
+    removeButtons.forEach(function(button){
+        button.addEventListener('click', function(){
+        button.parentElement.remove();
+        init();
+        });
+    });
+}
+</script>
+
+<% include ../partials/footer %>
