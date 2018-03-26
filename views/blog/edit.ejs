@@ -22,9 +22,32 @@
         </div>
         <div class="field">
                 <label>Content</label>
-                <textarea name="post[body]"><%= post.body %>"</textarea>
+                <input id="bodyInput" name="post[body]" value="">
+                <div id="editor" style="height:300px">
+                    <%- post.body %>
+                </div>
         </div>
-        <button class="ui blue button">Submit</button>
+        <button id="submitButton" class="ui blue button">Submit</button>
     </form>
 </div>
+
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    
+var quill = new Quill('#editor', {
+        theme: 'snow',
+        
+});
+
+
+var submitButton = document.getElementById('submitButton');
+
+submitButton.addEventListener('mouseover', function(){
+    var quillEditorData = document.querySelector('.ql-editor').innerHTML;
+    var bodyInput = document.getElementById('bodyInput');
+    bodyInput.value = quillEditorData;
+});
+
+</script>
 <% include ../partials/footer %>
