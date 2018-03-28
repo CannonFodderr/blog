@@ -11,10 +11,7 @@ var express                 = require('express'),
     User                    = require('./models/user'),
     Post                    = require('./models/post'),
     Comment                 = require('./models/comment'),
-    flash                   = require('connect-flash'),
-    port                    = process.env.PORT || 8080;
-    ip                      = process.env.IP,
-    DATABASEURL             = process.env.DATABASEURL;
+    flash                   = require('connect-flash');
 
 var authRoutes      = require('./routes/auth'),
     postRoutes      = require('./routes/index'),
@@ -25,7 +22,7 @@ var authRoutes      = require('./routes/auth'),
 //  Connect to mongoose
 // ====================
 
-mongoose.connect(DATABASEURL);
+mongoose.connect(process.env.DATABASEURL);
 
 // mongoose.connect('mongodb://idan:beta@ds121889.mlab.com:21889/blogapp');
 // mongoose.connect("mongodb://localhost/cooking");
@@ -67,6 +64,6 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(recepieRoutes);
 
-app.listen(port, function(req, res){
+app.listen(process.env.PORT, process.env.IP, function(req, res){
     console.log('Server is serving...');
 });
