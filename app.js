@@ -24,8 +24,6 @@ var authRoutes      = require('./routes/auth'),
 
 mongoose.connect(process.env.DATABASEURL);
 
-// mongoose.connect('mongodb://idan:beta@ds121889.mlab.com:21889/blogapp');
-// mongoose.connect("mongodb://localhost/cooking");
 // ====================
 //  App config
 // ===================
