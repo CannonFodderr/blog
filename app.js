@@ -63,6 +63,6 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(recepieRoutes);
 
-app.listen(process.env.port, process.env.ip, function(req, res){
+app.listen(process.env.PORT, function(req, res){
     console.log('Server is serving...');
 });
