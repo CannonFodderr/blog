@@ -12,7 +12,7 @@ var express                 = require('express'),
     Post                    = require('./models/post'),
     Comment                 = require('./models/comment'),
     flash                   = require('connect-flash'),
-    port                    = process.env.port || 8080,
+    port                    = process.env.port,
     ip                      = process.env.ip;
 
 var authRoutes      = require('./routes/auth'),
