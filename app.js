@@ -13,7 +13,7 @@ var express                 = require('express'),
     Comment                 = require('./models/comment'),
     flash                   = require('connect-flash'),
     port                    = process.env.port || 8080,
-    ip                      = process.env.port;
+    ip                      = process.env.ip;
 
 var authRoutes      = require('./routes/auth'),
     postRoutes      = require('./routes/index'),
