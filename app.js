@@ -12,8 +12,9 @@ var express                 = require('express'),
     Post                    = require('./models/post'),
     Comment                 = require('./models/comment'),
     flash                   = require('connect-flash'),
-    port                    = process.env.port,
-    ip                      = process.env.ip;
+    port                    = process.env.PORT || 8080;
+    ip                      = process.env.IP,
+    DATABASEURL             = process.env.DATABASEURL;
 
 var authRoutes      = require('./routes/auth'),
     postRoutes      = require('./routes/index'),
@@ -23,8 +24,11 @@ var authRoutes      = require('./routes/auth'),
 // ====================
 //  Connect to mongoose
 // ====================
-// mongoose.connect('mongodb://localhost/cooking');
-mongoose.connect('mongodb://idan:beta@ds121889.mlab.com:21889/blogapp');
+
+mongoose.connect(DATABASEURL);
+
+// mongoose.connect('mongodb://idan:beta@ds121889.mlab.com:21889/blogapp');
+// mongoose.connect("mongodb://localhost/cooking");
 // ====================
 //  App config
 // ===================
@@ -63,6 +67,6 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(recepieRoutes);
 
-app.listen(process.env.PORT, function(req, res){
+app.listen(port, function(req, res){
     console.log('Server is serving...');
 });
