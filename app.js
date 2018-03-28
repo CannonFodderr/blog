@@ -11,7 +11,9 @@ var express                 = require('express'),
     User                    = require('./models/user'),
     Post                    = require('./models/post'),
     Comment                 = require('./models/comment'),
-    flash                   = require('connect-flash');
+    flash                   = require('connect-flash'),
+    port                    = process.env.port || 8080,
+    ip                      = process.env.port;
 
 var authRoutes      = require('./routes/auth'),
     postRoutes      = require('./routes/index'),
@@ -61,6 +63,6 @@ app.use(postRoutes);
 app.use(commentRoutes);
 app.use(recepieRoutes);
 
-app.listen(8080, function(req, res){
+app.listen(port,ip, function(req, res){
     console.log('Server is serving...');
 });
